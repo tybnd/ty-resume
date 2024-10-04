@@ -2,11 +2,12 @@ name: main
 on: push
 env:
   PYTHON_VERSION: 3.12.5
+
 jobs:
   build-infra:
     runs-on: ubuntu-latest
     timeout-minutes: 2
-    steps:
+    steps:    
       # Step to check out the repository
       - uses: actions/checkout@v3
 
@@ -16,30 +17,26 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      # Create the AWS credentials and config file
-      - name: Set up AWS Credentials
-        run: |
-          cp aws-config/credentials ~/.aws/credentials
-          cp aws-config/config ~/.aws/config
-          echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
-        shell: bash
+      # Set up AWS credentials using secrets
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-      # Install required Python packages (including boto3)
-      - name: Install dependencies
+      # Install dependencies and run tests for get-function
+      - name: Install dependencies and run get-function tests
         run: |
+          cd ty-resume/get-function
           python -m pip install --upgrade pip
-          pip install -r get-function/requirements.txt
-
-      # Run tests for the get-function
-      - name: Test get-function
-        run: |
-          cd get-function
+          pip install -r requirements.txt
           python -m unittest discover -v
-          cd ..
 
       # Run tests for the put-function
-      - name: Test put-function
+      - name: Run put-function tests
         run: |
-          cd put-function
+          cd ty-resume/put-function
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
           python -m unittest discover -v
-          cd ..
