@@ -24,13 +24,13 @@ jobs:
       # Run tests for the get-function
       - name: Test get-function
         run: |
-          cd get-function/test_functions.py
+          cd get-function
           python -m unittest discover -v
           cd ../../
 
       # Run tests for the put-function
       - name: Test put-function
         run: |
-          cd put-function/test_functions.py
+          cd put-function
           python -m unittest discover -v
           cd ../../
