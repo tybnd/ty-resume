@@ -22,7 +22,6 @@ jobs:
         run: |
           echo "ACCESS_KEY_ID is set: ${{ secrets.ACCESS_KEY_ID != '' }}"
           echo "SECRET_ACCESS_KEY is set: ${{ secrets.SECRET_ACCESS_KEY != '' }}"
-          echo "SESSION_TOKEN is set: ${{ secrets.SESSION_TOKEN != '' }}"
           echo "REGION is set: ${{ secrets.REGION != '' }}"
 
       # Set up AWS credentials using secrets
@@ -31,7 +30,6 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.SESSION_TOKEN }}
           aws-region: ${{ secrets.REGION }}  # Ensure this is a valid region
 
       # Install dependencies and run tests for get-function
