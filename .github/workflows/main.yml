@@ -20,7 +20,7 @@ jobs:
       # Install dependencies and run tests for get-function
       - name: Install dependencies and run get-function tests
         run: |
-          cd ty-resume/get-function
+          cd get-function
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python -m unittest discover -v
@@ -28,7 +28,7 @@ jobs:
       # Run tests for the put-function
       - name: Run put-function tests
         run: |
-          cd ty-resume/put-function
+          cd put-function
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python -m unittest discover -v
