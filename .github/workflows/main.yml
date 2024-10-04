@@ -6,22 +6,31 @@ jobs:
   build-infra:
     runs-on: ubuntu-latest
     timeout-minutes: 2
-    steps:    
-      # Step to check out the repository
+    steps:
       - uses: actions/checkout@v3
 
-      # Set up Python environment with the correct version
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      # Install dependencies for the get-function
+      # Set AWS environment variables for testing
+      - name: Set AWS environment variables
+        run: |
+          echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
+
+      # Install necessary dependencies for get-function
       - name: Install dependencies for get-function
         run: |
           cd get-function
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m pip install -r requirements.txt
+          cd ..
+
+      # Install necessary dependencies for put-function
+      - name: Install dependencies for put-function
+        run: |
+          cd put-function
+          python -m pip install -r requirements.txt
           cd ..
 
       # Run tests for the get-function
@@ -29,14 +38,6 @@ jobs:
         run: |
           cd get-function
           python -m unittest discover -v
-          cd ..
-
-      # Install dependencies for the put-function
-      - name: Install dependencies for put-function
-        run: |
-          cd put-function
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
           cd ..
 
       # Run tests for the put-function
