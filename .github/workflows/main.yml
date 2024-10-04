@@ -22,7 +22,7 @@ jobs:
           mkdir -p ~/.aws
           echo "${{ secrets.AWS_CREDENTIALS_FILE }}" > ~/.aws/credentials
           echo "${{ secrets.AWS_CONFIG_FILE }}" > ~/.aws/config
-          echo "[default]\nregion = us-east-1" > ~/.aws/config
+          echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
         shell: bash
 
       # Install required Python packages (including boto3)
