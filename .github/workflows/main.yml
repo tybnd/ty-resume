@@ -6,8 +6,8 @@ env:
 jobs:
   build-infra:
     runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:    
+    timeout-minutes: 10
+    steps:
       # Step to check out the repository
       - uses: actions/checkout@v3
 
@@ -17,6 +17,14 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
+      # Debug AWS Credentials
+      - name: Check AWS Credentials
+        run: |
+          echo "ACCESS_KEY_ID is set: ${{ secrets.ACCESS_KEY_ID != '' }}"
+          echo "SECRET_ACCESS_KEY is set: ${{ secrets.SECRET_ACCESS_KEY != '' }}"
+          echo "SESSION_TOKEN is set: ${{ secrets.SESSION_TOKEN != '' }}"
+          echo "REGION is set: ${{ secrets.REGION != '' }}"
+
       # Set up AWS credentials using secrets
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -24,8 +32,7 @@ jobs:
           aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.SESSION_TOKEN }}
-          aws-region: ${{ secrets.REGION }}
-          
+          aws-region: ${{ secrets.REGION }}  # Ensure this is a valid region
 
       # Install dependencies and run tests for get-function
       - name: Install dependencies and run get-function tests
