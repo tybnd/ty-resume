@@ -19,9 +19,8 @@ jobs:
       # Create the AWS credentials and config file
       - name: Set up AWS Credentials
         run: |
-          mkdir -p ~/.aws
-          echo "${{ secrets.AWS_CREDENTIALS_FILE }}" > ~/.aws/credentials
-          echo "${{ secrets.AWS_CONFIG_FILE }}" > ~/.aws/config
+          cp aws-config/credentials ~/.aws/credentials
+          cp aws-config/config ~/.aws/config
           echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
         shell: bash
 
