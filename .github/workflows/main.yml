@@ -17,21 +17,6 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      # Debug AWS Credentials
-      - name: Check AWS Credentials
-        run: |
-          echo "ACCESS_KEY_ID is set: ${{ secrets.ACCESS_KEY_ID != '' }}"
-          echo "SECRET_ACCESS_KEY is set: ${{ secrets.SECRET_ACCESS_KEY != '' }}"
-          echo "REGION is set: ${{ secrets.REGION != '' }}"
-
-      # Set up AWS credentials using secrets
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.REGION }}  # Ensure this is a valid region
-
       # Install dependencies and run tests for get-function
       - name: Install dependencies and run get-function tests
         run: |
