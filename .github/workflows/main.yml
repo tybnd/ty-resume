@@ -1,12 +1,7 @@
 name: main
-on: 
-  push:
-    branches:
-      - main  # Change this to the branch you want to trigger the workflow
-
+on: push
 env:
   PYTHON_VERSION: 3.12.5
-
 jobs:
   build-infra:
     runs-on: ubuntu-latest
@@ -21,16 +16,32 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      # Run tests for the get-function
-      - name: Test get-function/test_functions
+      # Install dependencies for get-function
+      - name: Install dependencies for get-function
         run: |
-          cd get-function
+          cd ty-resume/get-function
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          cd ../../
+
+      # Run tests for the get-function
+      - name: Test get-function
+        run: |
+          cd ty-resume/get-function
           python -m unittest discover -v
           cd ../../
 
-      # Run tests for the put-function
-      - name: Test put-function/test_functions
+      # Install dependencies for put-function
+      - name: Install dependencies for put-function
         run: |
-          cd put-function
+          cd ty-resume/put-function
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          cd ../../
+
+      # Run tests for the put-function
+      - name: Test put-function
+        run: |
+          cd ty-resume/put-function
           python -m unittest discover -v
           cd ../../
