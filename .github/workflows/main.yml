@@ -6,7 +6,7 @@ jobs:
   build-infra:
     runs-on: ubuntu-latest
     timeout-minutes: 2
-    steps:    
+    steps:
       # Step to check out the repository
       - uses: actions/checkout@v3
 
@@ -16,33 +16,30 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      # Set AWS credentials from GitHub Secrets
-      - name: Configure AWS credentials
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+      # Create the AWS credentials and config file
+      - name: Set up AWS Credentials
+        run: |
+          mkdir -p ~/.aws
+          echo "${{ secrets.AWS_CREDENTIALS_FILE }}" > ~/.aws/credentials
+          echo "${{ secrets.AWS_CONFIG_FILE }}" > ~/.aws/config
+        shell: bash
 
-      # Install dependencies
+      # Install required Python packages (including boto3)
       - name: Install dependencies
         run: |
-          cd get-function
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          cd ../put-function
-          pip install -r requirements.txt
-          cd ../
+          pip install -r get-function/requirements.txt
 
       # Run tests for the get-function
       - name: Test get-function
         run: |
           cd get-function
           python -m unittest discover -v
-          cd ../
+          cd ..
 
       # Run tests for the put-function
       - name: Test put-function
         run: |
           cd put-function
           python -m unittest discover -v
-          cd ../
+          cd ..
