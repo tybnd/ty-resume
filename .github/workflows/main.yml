@@ -16,32 +16,32 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      # Install dependencies for get-function
+      # Install dependencies for the get-function
       - name: Install dependencies for get-function
         run: |
-          cd ty-resume/get-function
+          cd get-function
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          cd ../../
+          cd ..
 
       # Run tests for the get-function
       - name: Test get-function
         run: |
-          cd ty-resume/get-function
+          cd get-function
           python -m unittest discover -v
-          cd ../../
+          cd ..
 
-      # Install dependencies for put-function
+      # Install dependencies for the put-function
       - name: Install dependencies for put-function
         run: |
-          cd ty-resume/put-function
+          cd put-function
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          cd ../../
+          cd ..
 
       # Run tests for the put-function
       - name: Test put-function
         run: |
-          cd ty-resume/put-function
+          cd put-function
           python -m unittest discover -v
-          cd ../../
+          cd ..
