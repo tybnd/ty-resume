@@ -22,14 +22,14 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       # Run tests for the get-function
-      - name: Test get-function
+      - name: Test get-function/test_functions
         run: |
           cd get-function
           python -m unittest discover -v
           cd ../../
 
       # Run tests for the put-function
-      - name: Test put-function
+      - name: Test put-function/test_functions
         run: |
           cd put-function
           python -m unittest discover -v
