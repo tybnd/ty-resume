@@ -1,0 +1,36 @@
+name: main
+on: 
+  push:
+    branches:
+      - main  # Change this to the branch you want to trigger the workflow
+
+env:
+  PYTHON_VERSION: 3.12.5
+
+jobs:
+  build-infra:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:    
+      # Step to check out the repository
+      - uses: actions/checkout@v3
+
+      # Set up Python environment with the correct version
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      # Run tests for the get-function
+      - name: Test get-function
+        run: |
+          cd ty-resume/get-function/test_functions.py
+          python -m unittest discover -v
+          cd ../../
+
+      # Run tests for the put-function
+      - name: Test put-function
+        run: |
+          cd ty-resume/put-function/test_functions.py
+          python -m unittest discover -v
+          cd ../../
