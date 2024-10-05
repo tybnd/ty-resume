@@ -1,34 +1,38 @@
-name: main
+name: Run Tests
 on: push
 env:
   PYTHON_VERSION: 3.12.5
 
 jobs:
-  build-infra:
+  test:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     steps:
-      # Step to check out the repository
       - uses: actions/checkout@v3
-
-      # Set up Python environment with the correct version
+      
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      # Install dependencies and run tests for get-function
-      - name: Install dependencies and run get-function tests
+      # Configure AWS credentials (using GitHub secrets)
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.SESSION_TOKEN }}
+          aws-region: ${{ secrets.REGION }}
+
+      - name: Install dependencies and run tests for get-function
         run: |
           cd get-function
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python -m unittest discover -v
 
-      # Run tests for the put-function
-      - name: Run put-function tests
+      - name: Install dependencies and run tests for put-function
         run: |
-          cd put-function
+          cd ../put-function
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python -m unittest discover -v
