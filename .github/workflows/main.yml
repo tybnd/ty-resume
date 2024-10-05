@@ -16,14 +16,14 @@ jobs:
 
       - name: Install dependencies and run tests for get-function
         run: |
-          cd get-function
+          cd get-function//test_functions
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python -m unittest discover -v
 
       - name: Install dependencies and run tests for put-function
         run: |
-          cd ../put-function
+          cd ../put-function/test_functions
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python -m unittest discover -v
