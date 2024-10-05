@@ -17,6 +17,11 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
+      - name: Set up AWS credentials
+        env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
+        AWS_SESSION_TOKEN: ${{ secrets.SESSION_TOKEN }} # Optional if using temporary credentials
       # Install dependencies and run tests for get-function
       - name: Install dependencies and run get-function tests
         run: |
