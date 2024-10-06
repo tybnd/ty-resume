@@ -10,7 +10,7 @@ class TestPutFunction(unittest.TestCase):
             "pathParameters": {
                 "ID": "123"  # As per your function's setup
             },
-            "body": '{"VisitorCount": 152}'  # Example of what your PUT request body might contain
+            "body": '{"VisitorCount": "*" }'  # Example of what your PUT request body might contain
         }
         context = {}  # Mock context
 
