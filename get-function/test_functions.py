@@ -1,5 +1,5 @@
 import unittest
-from app import lambda_handler  # Adjust the import as necessary based on your project structure
+from app import *  # Adjust the import as necessary based on your project structure
 
 class TestGetFunction(unittest.TestCase):
 
@@ -17,7 +17,7 @@ class TestGetFunction(unittest.TestCase):
         response = lambda_handler(event, context)
 
         # Define the expected response
-        expected_body = '{"message": "Visitor count retrieved successfully", "visitorCount": "*" }'
+        expected_body = '{"message": "Visitor count retrieved successfully", "visitorCount": {visitorCount} }'
         expected_status_code = 200
 
         # Assert body and statusCode separately
