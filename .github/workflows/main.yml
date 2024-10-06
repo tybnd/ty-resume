@@ -24,7 +24,15 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          aws-region: ${{ secrets.AWS_REGION }}  # Use lowercase `aws-region`
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Debug Secrets
+      - name: Debug Secrets
+        run: |
+          echo "AWS_ACCESS_KEY_ID set: ${{ secrets.AWS_ACCESS_KEY_ID != '' }}"
+          echo "AWS_SECRET_ACCESS_KEY set: ${{ secrets.AWS_SECRET_ACCESS_KEY != '' }}"
+          echo "AWS_SESSION_TOKEN set: ${{ secrets.AWS_SESSION_TOKEN != '' }}"
+          echo "AWS_REGION set: ${{ secrets.AWS_REGION != '' }}"
 
       # Install dependencies and run tests for get-function
       - name: Install dependencies and run get-function tests
