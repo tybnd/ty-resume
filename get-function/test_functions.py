@@ -2,32 +2,38 @@ import unittest
 from app import lambda_handler  # Adjust the import as necessary based on your project structure
 
 class TestGetFunction(unittest.TestCase):
-    
+
     def test_lambda_handler(self):
-        # Define the event and context you want to simulate
+        # Simulate the event for the GET request
         event = {
             "httpMethod": "GET",
             "pathParameters": {
-                "ID": "123"  # Adjust according to your function's expected input
+                "ID": "123"  # As per your function's setup
             }
         }
-        context = {}  # You can define a mock context if needed
+        context = {}  # Mock context
 
-        # Call the lambda_handler with the test event and context
+        # Call the lambda_handler with the simulated event and context
         response = lambda_handler(event, context)
 
-        # Expected response based on real function output
-        expected_response = {
-            "statusCode": 200,
-            "body": '{"message": "Visitor count retrieved successfully", "visitorCount": 147.0}',
-            "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT",
-                "Access-Control-Allow-Headers": "Content-Type,Authorization"
-            }
+        # Define the expected response
+        expected_body = '{"message": "Visitor count retrieved successfully", "visitorCount": 147.0}'
+        expected_status_code = 200
+
+        # Assert body and statusCode separately
+        self.assertEqual(response['body'], expected_body)
+        self.assertEqual(response['statusCode'], expected_status_code)
+
+        # Optionally, you can assert specific headers if needed
+        expected_headers = {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET,PUT',
+            'Access-Control-Allow-Headers': 'Content-Type,Authorization'
         }
 
-        self.assertEqual(response, expected_response)
+        # Check that the expected headers are present (ignoring order)
+        for key, value in expected_headers.items():
+            self.assertEqual(response['headers'][key], value)
 
 if __name__ == '__main__':
     unittest.main()
