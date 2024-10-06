@@ -1,6 +1,7 @@
 import unittest
 from app import lambda_handler
 
+
 class TestGetFunction(unittest.TestCase):
 
     def test_lambda_handler(self):
@@ -19,14 +20,12 @@ class TestGetFunction(unittest.TestCase):
         # Define the expected response structure (adjust according to your function's output)
         expected_response = {
             "statusCode": 200,
+            "body": '{"message": "Test Successful", "visitorCount": "TEST" }',
             "headers": {
-                    "Access-Control-Allow-Headers": "Content-Type",
-                    "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT",
-                    "Access-Control-Allow-Origin": "*"
-                },
-            "body": '{"message": "Your expected output here"}',  # Adjust based on actual response
-            # If your function returns headers, include them here:
-            # "headers": {"Content-Type": "application/json"}
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT",
+                "Access-Control-Allow-Headers": "Content-Type,Authorization"
+            }
         }
 
         # Assert the response matches the expected output
