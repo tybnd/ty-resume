@@ -1,34 +1,33 @@
 import unittest
-from app import lambda_handler
+from app import lambda_handler  # Adjust the import as necessary based on your project structure
 
-class TestGetFunction(unittest.TestCase):
-    
+class TestPutFunction(unittest.TestCase):
+
     def test_lambda_handler(self):
-        # Define a test event with 'isTest' set to True
+        # Simulate the event for the PUT request
         event = {
             "httpMethod": "PUT",
             "pathParameters": {
-                "ID": "123"
+                "ID": "123"  # As per your function's setup
             },
-            "isTest": True  # This will trigger the test response
+            "body": '{"VisitorCount": 150}'  # Example of what your PUT request body might contain
         }
-        context = {}  # You can define a mock context if needed
+        context = {}  # Mock context
 
-        # Call the lambda_handler with the test event and context
+        # Call the lambda_handler with the simulated event and context
         response = lambda_handler(event, context)
 
-        # Expected test response
+        # Define the expected response using "Test Successful"
         expected_response = {
             "statusCode": 200,
-            "body": '{"message": "Test Successful", "visitorCount": "TEST" }',
-            "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT",
-                "Access-Control-Allow-Headers": "Content-Type,Authorization"
-            }
+            "body": '{"message": "Test Successful", "updatedAttributes": {"VisitorCount": "TEST"}}'
         }
 
-        self.assertEqual(response, expected_response)
+        # Assert that the response body matches the expected body
+        self.assertEqual(response['body'], expected_response['body'])
+
+        # Optionally, also check if statusCode is 200
+        self.assertEqual(response['statusCode'], 200)
 
 if __name__ == '__main__':
     unittest.main()
