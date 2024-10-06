@@ -22,7 +22,7 @@ jobs:
         with:
           AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN: ${{ secrets.SESSION_TOKEN }
+          AWS_SESSION_TOKEN: ${{ secrets.SESSION_TOKEN }}
       # Install dependencies and run tests for get-function
       - name: Install dependencies and run get-function tests
         run: |
