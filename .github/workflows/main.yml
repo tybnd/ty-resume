@@ -17,13 +17,15 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
+      # Set up AWS credentials
       - name: Set up AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws_access_key_id: ${{ secrets.ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.SECRET_ACCESS_KEY }}
-          aws_session_token: ${{ secrets.SESSION_TOKEN }}
-          aws_region: ${{ secrets.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ secrets.AWS_REGION }}  # Use lowercase `aws-region`
+
       # Install dependencies and run tests for get-function
       - name: Install dependencies and run get-function tests
         run: |
