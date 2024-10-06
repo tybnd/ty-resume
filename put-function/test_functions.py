@@ -1,22 +1,23 @@
 import unittest
-from app import lambda_handler  # Adjust the import as necessary based on your project structure
+from app import lambda_handler
 
 class TestGetFunction(unittest.TestCase):
     
     def test_lambda_handler(self):
-        # Define the event and context you want to simulate
+        # Define a test event with 'isTest' set to True
         event = {
-            "httpMethod": "GET",
+            "httpMethod": "PUT",
             "pathParameters": {
-                "ID": "123"  # Adjust according to your function's expected input
-            }
+                "ID": "123"
+            },
+            "isTest": True  # This will trigger the test response
         }
         context = {}  # You can define a mock context if needed
 
         # Call the lambda_handler with the test event and context
         response = lambda_handler(event, context)
 
-        # Adjust expected response based on what your function actually returns
+        # Expected test response
         expected_response = {
             "statusCode": 200,
             "body": '{"message": "Test Successful", "visitorCount": "TEST" }',

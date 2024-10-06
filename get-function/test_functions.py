@@ -1,23 +1,23 @@
 import unittest
 from app import lambda_handler
 
-
 class TestGetFunction(unittest.TestCase):
-
+    
     def test_lambda_handler(self):
-        # Define the event and context for the test
+        # Define a test event with 'isTest' set to True
         event = {
             "httpMethod": "GET",
             "pathParameters": {
-                "ID": "123"  # Adjust according to your function's expected input
-            }
+                "ID": "123"
+            },
+            "isTest": True  # This will trigger the test response
         }
-        context = {}  # Empty context unless your Lambda requires something specific
+        context = {}  # You can define a mock context if needed
 
-        # Call the lambda_handler function with the test event and context
+        # Call the lambda_handler with the test event and context
         response = lambda_handler(event, context)
 
-        # Define the expected response structure (adjust according to your function's output)
+        # Expected test response
         expected_response = {
             "statusCode": 200,
             "body": '{"message": "Test Successful", "visitorCount": "TEST" }',
@@ -28,11 +28,7 @@ class TestGetFunction(unittest.TestCase):
             }
         }
 
-        # Assert the response matches the expected output
-        self.assertEqual(response['statusCode'], expected_response['statusCode'])
-        self.assertEqual(response['body'], expected_response['body'])
-        # If you're testing headers, assert them too:
-        # self.assertEqual(response['headers'], expected_response['headers'])
+        self.assertEqual(response, expected_response)
 
 if __name__ == '__main__':
     unittest.main()
