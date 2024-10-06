@@ -1,19 +1,21 @@
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 from app import lambda_handler
 
 class TestGetFunction(unittest.TestCase):
+    
     @patch('app.dynamodb.Table')  # Mock the DynamoDB table
     def test_lambda_handler(self, mock_table):
-        # Mock response from DynamoDB
+        # Mock the DynamoDB get_item method to return a visitor count of 147.0
         mock_table.return_value.get_item.return_value = {
             'Item': {'VisitorCount': 147.0}
         }
 
-        event = {}  # Define your test event if needed
-        context = {}  # Define a mock context if needed
+        # Test event and context
+        event = {}  # Define a dummy event if needed
+        context = {}  # Define a dummy context if needed
 
-        # Expected response
+        # Expected response body
         expected_body = '{"message": "Visitor count retrieved successfully", "visitorCount": 147.0}'
         expected_response = {
             'statusCode': 200,
@@ -28,7 +30,7 @@ class TestGetFunction(unittest.TestCase):
         # Call the lambda function
         response = lambda_handler(event, context)
 
-        # Assert the response
+        # Assertions
         self.assertEqual(response['body'], expected_body)
         self.assertEqual(response['statusCode'], expected_response['statusCode'])
         self.assertEqual(response['headers'], expected_response['headers'])
