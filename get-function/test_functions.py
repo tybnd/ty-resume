@@ -24,7 +24,7 @@ class TestGetFunction(unittest.TestCase):
         self.assertEqual(response['body'], expected_body)
         self.assertEqual(response['statusCode'], expected_status_code)
 
-        # Optionally, you can assert specific headers if needed
+        # Define the expected headers based on actual values returned by your function
         expected_headers = {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET,PUT',
