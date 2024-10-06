@@ -2,11 +2,12 @@ name: main
 on: push
 env:
   PYTHON_VERSION: 3.12.5
+
 jobs:
   build-infra:
     runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:    
+    timeout-minutes: 10
+    steps:
       # Step to check out the repository
       - uses: actions/checkout@v3
 
@@ -16,32 +17,27 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      # Install dependencies for the get-function
-      - name: Install dependencies for get-function
+      # Set up AWS credentials
+      - name: Set up AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ secrets.AWS_REGION }}  # Use lowercase `aws-region`
+
+      # Install dependencies and run tests for get-function
+      - name: Install dependencies and run get-function tests
         run: |
           cd get-function
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          cd ..
-
-      # Run tests for the get-function
-      - name: Test get-function
-        run: |
-          cd get-function
-          python -m unittest discover -v
-          cd ..
-
-      # Install dependencies for the put-function
-      - name: Install dependencies for put-function
-        run: |
-          cd put-function
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          cd ..
+          python -m unittest test_functions.py -v
 
       # Run tests for the put-function
-      - name: Test put-function
+      - name: Run put-function tests
         run: |
           cd put-function
-          python -m unittest discover -v
-          cd ..
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m unittest test_functions.py -v
