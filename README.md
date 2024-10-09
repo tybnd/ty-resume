@@ -128,3 +128,28 @@ sam delete --stack-name "ty-resume"
 See the [AWS SAM developer guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) for an introduction to SAM specification, the SAM CLI, and serverless application concepts.
 
 Next, you can use AWS Serverless Application Repository to deploy ready to use Apps that go beyond hello world samples and learn how authors developed their applications: [AWS Serverless Application Repository main page](https://aws.amazon.com/serverless/serverlessrepo/)
+
+
+Hello all!
+
+I am Tyler, an aspiring cloud engineer. This is my first project using AWS and other resources to build my Cloud Resume. I built my resume using a multitude of different resources, in specific:
+
+- AWS Serverless Application Model (SAM)
+- AWS CloudFormation
+- Python
+- Javascript
+- HTML
+- CSS
+- DynamoDB
+- API Gateway
+- Cloudfront
+- Simple Storage Service (S3)
+- Lambda
+- IAM
+- Certificate Manager
+- CloudWatch
+- Route53
+- Visual Studio Code (VSCode)
+- YAML
+- JSON
+- Powershell
