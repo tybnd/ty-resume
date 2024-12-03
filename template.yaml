@@ -134,7 +134,7 @@ Resources:
                   default:
                     statusCode: "200"
                     responseParameters:
-                      method.response.header.Access-Control-Allow-Origin: "'https://tycloudresume.com,https://tycloudresume.com/cloudinv'"
+                      method.response.header.Access-Control-Allow-Origin: "'https://tycloudresume.com'"
                       method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST,GET,PUT'"
                       method.response.header.Access-Control-Allow-Headers: "'Content-Type'"
                     responseTemplates:
@@ -152,7 +152,7 @@ Resources:
                   headers:
                     Access-Control-Allow-Origin:
                       type: string
-                      default: "'https://tycloudresume.com,https://tycloudresume.com/cloudinv'"
+                      default: "'https://tycloudresume.com'"
                     Access-Control-Allow-Methods:
                       type: string
                       default: "'OPTIONS,POST,GET,PUT'"
@@ -174,7 +174,7 @@ Resources:
                   default:
                     statusCode: "200"
                     responseParameters:
-                      method.response.header.Access-Control-Allow-Origin: "'https://tycloudresume.com,https://tycloudresume.com/cloudinv'"
+                      method.response.header.Access-Control-Allow-Origin: "'https://tycloudresume.com'"
                       method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST,GET,PUT'"
                       method.response.header.Access-Control-Allow-Headers: "'Content-Type, Authorization'"
 
@@ -223,7 +223,7 @@ Resources:
                   default:
                     statusCode: "200"
                     responseParameters:
-                      method.response.header.Access-Control-Allow-Origin: "'https://tycloudresume.com,https://tycloudresume.com/cloudinv'"
+                      method.response.header.Access-Control-Allow-Origin: "'https://tycloudresume.com'"
                       method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST,GET,PUT'"
                       method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization'"
                     responseTemplates:
@@ -241,7 +241,7 @@ Resources:
                   headers:
                     Access-Control-Allow-Origin:
                       type: string
-                      default: "'https://tycloudresume.com,https://tycloudresume.com/cloudinv'"
+                      default: "'https://tycloudresume.com'"
                     Access-Control-Allow-Methods:
                       type: string
                       default: "'OPTIONS,POST,GET,PUT'"
@@ -263,7 +263,7 @@ Resources:
                   default:
                     statusCode: "200"
                     responseParameters:
-                      method.response.header.Access-Control-Allow-Origin: "'https://tycloudresume.com,https://tycloudresume.com/cloudinv'"
+                      method.response.header.Access-Control-Allow-Origin: "'https://tycloudresume.com'"
                       method.response.header.Access-Control-Allow-Methods: "'OPTIONS,POST,GET,PUT'"
                       method.response.header.Access-Control-Allow-Headers: "'Content-Type, Authorization'"
                     responseTemplates:
